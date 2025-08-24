@@ -20,3 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 use App\Http\Controllers\AuthController;
 Route::post('/auth/google', [AuthController::class, 'google']);
+Route::post('/auth/refresh', [AuthController::class, 'refresh']);
+
+// Create middleware group auth:sanctum
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/auth/whoami', [AuthController::class, 'whoami']);
+});
