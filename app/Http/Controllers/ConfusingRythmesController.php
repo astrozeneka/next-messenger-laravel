@@ -25,10 +25,10 @@ class ConfusingRythmesController extends Controller
                     SELECT id 
                     FROM confusing_rhymes
                     ORDER BY RAND()
-                    LIMIT 100
+                    LIMIT 2000
                 ) r ON t.id = r.id
                 ORDER BY RAND()
-                LIMIT 100
+                LIMIT 2000
             ");
 
             // Debug: Check if we have data
