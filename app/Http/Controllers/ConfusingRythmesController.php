@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ConfusingRythmesController extends Controller
 {
@@ -12,8 +13,9 @@ class ConfusingRythmesController extends Controller
         $request->validate([
             'level' => 'required|integer|min:1|max:32'
         ]);
+        Log::info("Received request for study set", ['level' => $request->input('level')]);
 
-        $level = $request->input('level');
+        $level = intval($request->input('level'));
 
         try {
             $confusingRhymes = DB::select("
@@ -23,10 +25,10 @@ class ConfusingRythmesController extends Controller
                     SELECT id 
                     FROM confusing_rhymes
                     ORDER BY RAND()
-                    LIMIT 1000
+                    LIMIT 100
                 ) r ON t.id = r.id
                 ORDER BY RAND()
-                LIMIT 1000
+                LIMIT 100
             ");
 
             // Debug: Check if we have data
