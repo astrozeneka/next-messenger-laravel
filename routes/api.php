@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConfusingRythmesController;
+
 Route::post('/auth/google', [AuthController::class, 'google']);
 Route::post('/auth/refresh', [AuthController::class, 'refresh']);
 
@@ -26,3 +28,6 @@ Route::post('/auth/refresh', [AuthController::class, 'refresh']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/whoami', [AuthController::class, 'whoami']);
 });
+
+// Temporarily test without auth
+Route::get('/confusing-rhymes/study-set', [ConfusingRythmesController::class, 'getStudySet']);
