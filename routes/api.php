@@ -19,4 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConversationController;
+
 Route::post('/auth/google', [AuthController::class, 'google']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/conversations/{conversationId}/users', [ConversationController::class, 'getUsers']);
+});
